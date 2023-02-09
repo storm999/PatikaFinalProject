@@ -34,7 +34,7 @@ namespace PatikaFinalProject.Common
 
             //services.AddScoped<DbContext, DbContext>();
             services.AddTransient<IValidator<CustomerCreateDTO>, CustomerCreateDTOValidator>();
-            services.AddScoped<CustomerServices, CustomerServices>();
+            services.AddScoped<CustomerService, CustomerService>();
             
             services.AddScoped<MovieServices, MovieServices>();
             
