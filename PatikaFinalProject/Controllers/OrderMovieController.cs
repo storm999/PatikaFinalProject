@@ -24,9 +24,9 @@ namespace PatikaFinalProject.Controllers
         
         [Authorize(Roles = "Member")]
         [HttpPost("OrderMovie")]
-        public async Task<IResponse<OrderMovieCreateDTO>> AddOrderMovie(OrderMovieCreateDTO newOrderMovie)
+        public async Task<IResponse<OrderCreateDTO>> OrderMovie(int movieID)
         {
-            return await _OrderMovieService.Create(newOrderMovie);
+            return await _OrderMovieService.Create(movieID);
         }
 
         [AllowAnonymous]
@@ -44,7 +44,5 @@ namespace PatikaFinalProject.Controllers
                 return Unauthorized();
             }
         }
-
-
     }
 }

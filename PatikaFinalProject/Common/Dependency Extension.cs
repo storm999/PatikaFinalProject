@@ -16,13 +16,12 @@ namespace PatikaFinalProject.Common
     {
         public static void AddDependencies(this IServiceCollection services)
         {
-            MapperConfiguration configuration = new MapperConfiguration(opt =>
-                                                                {
-                                                                    opt.AddProfile(new CustomerProfile());
-                                                                    opt.AddProfile(new ActorProfile());
-                                                                    opt.AddProfile(new DirectorProfile());
-                                                                    opt.AddProfile(new MovieProfile());
-                                                                });
+            MapperConfiguration configuration = new MapperConfiguration(opt => {
+                                                                                    opt.AddProfile(new CustomerProfile());
+                                                                                    opt.AddProfile(new ActorProfile());
+                                                                                    opt.AddProfile(new DirectorProfile());
+                                                                                    opt.AddProfile(new MovieProfile());
+                                                                                });
 
             IMapper mapper = configuration.CreateMapper();
 
@@ -46,6 +45,7 @@ namespace PatikaFinalProject.Common
             services.AddScoped<CustomerService, CustomerService>();
             services.AddScoped<ActorService, ActorService>();
             services.AddScoped<MovieService, MovieService>();
+            services.AddScoped<OrderMovieService, OrderMovieService>();
             
             
 
