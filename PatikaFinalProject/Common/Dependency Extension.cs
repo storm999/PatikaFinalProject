@@ -21,6 +21,7 @@ namespace PatikaFinalProject.Common
                                                                     opt.AddProfile(new CustomerProfile());
                                                                     opt.AddProfile(new ActorProfile());
                                                                     opt.AddProfile(new DirectorProfile());
+                                                                    opt.AddProfile(new MovieProfile());
                                                                 });
 
             IMapper mapper = configuration.CreateMapper();
@@ -38,10 +39,14 @@ namespace PatikaFinalProject.Common
             services.AddTransient<IValidator<CustomerCreateDTO>, CustomerCreateDTOValidator>();
             services.AddTransient<IValidator<ActorDTO>, ActorDTOValidator>();
             services.AddTransient<IValidator<ActorCreateDTO>, ActorCreateDTOValidator>();
+            services.AddTransient<IValidator<MovieDTO>, MovieDTOValidator>();
+            services.AddTransient<IValidator<MovieCreateDTO>, MovieCreateDTOValidator>();
+            services.AddTransient<IValidator<DirectorDTO>, DirectorDTOValidator>();
+            services.AddTransient<IValidator<DirectorCreateDTO>, DirectorCreateDTOValidator>();
 
             services.AddScoped<DirectorService, DirectorService>();
             services.AddScoped<CustomerService, CustomerService>();
-            
+            services.AddScoped<ActorService, ActorService>();
             services.AddScoped<MovieService, MovieService>();
             
             
