@@ -46,9 +46,7 @@ namespace PatikaFinalProject.Common
             services.AddScoped<ActorService, ActorService>();
             services.AddScoped<MovieService, MovieService>();
             services.AddScoped<OrderMovieService, OrderMovieService>();
-            
-            
-
+         
         }
     }
 }

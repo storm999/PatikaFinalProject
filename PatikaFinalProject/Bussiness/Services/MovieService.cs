@@ -68,7 +68,6 @@ namespace PatikaFinalProject.Bussiness.Services
             return new Response<List<MovieDTO>>(ResponseType.Success, data);
         }
 
-
         public async Task<IResponse<MovieDTO>> Update(MovieDTO dto)
         {
             var result = _DTOValidator.Validate(dto);
