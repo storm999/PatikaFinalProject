@@ -6,29 +6,31 @@ using PatikaFinalProject.Common;
 using PatikaFinalProject.DataAccess;
 using System.Linq;
 
-namespace PatikaFinalProject.Services
+namespace PatikaFinalProject.Bussiness.Services
 {
-    public class ActorService
+    public class DirectorService
     {
         private readonly MyDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IValidator<ActorCreateDTO> _createDtoValidator;
-        public ActorService(MyDbContext dbContext, IMapper mapper, IValidator<ActorCreateDTO> createDtoValidator)
+        private readonly IValidator<DirectorCreateDTO> _createDtoValidator;
+        private readonly IValidator<DirectorDTO> _DTOValidator;
+        public DirectorService(MyDbContext dbContext, IMapper mapper, IValidator<DirectorCreateDTO> createDtoValidator, IValidator<DirectorDTO> DTOValidator)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _createDtoValidator = createDtoValidator;
+            _DTOValidator = DTOValidator;
         }
 
-        public async Task<IResponse<ActorCreateDTO>> Create(ActorCreateDTO dto)
+        public async Task<IResponse<DirectorCreateDTO>> Create(DirectorCreateDTO dto)
         {
             ValidationResult validationResult = _createDtoValidator.Validate(dto);
 
             if (validationResult.IsValid)
             {
-                await _dbContext.Set<Actor>().AddAsync(_mapper.Map<Actor>(dto));
+                await _dbContext.Set<Director>().AddAsync(_mapper.Map<Director>(dto));
                 await _dbContext.SaveChangesAsync();
-                return new Response<ActorCreateDTO>(ResponseType.Success, dto);
+                return new Response<DirectorCreateDTO>(ResponseType.Success, dto);
             }
             else
             {
@@ -42,14 +44,14 @@ namespace PatikaFinalProject.Services
                     });
                 }
 
-                return new Response<ActorCreateDTO>(ResponseType.ValidationError, dto, errors);
+                return new Response<DirectorCreateDTO>(ResponseType.ValidationError, dto, errors);
             }
         }
-  
+
 
         public async Task<IResponse> Remove(int id)
         {
-            var removedEntity = _dbContext.Set<Actor>().SingleOrDefault(x => x.ID == id);
+            var removedEntity = _dbContext.Set<Director>().SingleOrDefault(x => x.ID == id);
             if (removedEntity != null)
             {
                 _dbContext.Remove(removedEntity);
@@ -60,26 +62,26 @@ namespace PatikaFinalProject.Services
 
         }
 
-        public async Task<IResponse<List<ActorDTO>>> GetAll()
+        public async Task<IResponse<List<DirectorDTO>>> GetAll()
         {
-            List<ActorDTO> data = _mapper.Map<List<ActorDTO>>(await _dbContext.Set<Actor>().ToListAsync());
-            return new Response<List<ActorDTO>>(ResponseType.Success, data);
+            List<DirectorDTO> data = _mapper.Map<List<DirectorDTO>>(await _dbContext.Set<Director>().ToListAsync());
+            return new Response<List<DirectorDTO>>(ResponseType.Success, data);
         }
 
 
-        public async Task<IResponse<WorkUpdateDto>> Update(Actor dto)
+        public async Task<IResponse<DirectorDTO>> Update(DirectorDTO dto)
         {
-            var result = _updateDtoValidator.Validate(dto);
+            var result = _DTOValidator.Validate(dto);
             if (result.IsValid)
             {
-                var updatedEntity = await _uow.GetRepository<Work>().Find(dto.Id);
+                var updatedEntity = await _dbContext.Set<Director>().FindAsync(dto.ID);
                 if (updatedEntity != null)
                 {
-                    _uow.GetRepository<Work>().Update(_mapper.Map<Work>(dto), updatedEntity);
-                    await _uow.SaveChanges();
-                    return new Response<WorkUpdateDto>(ResponseType.Success, dto);
+                    _dbContext.Set<Director>().Entry(updatedEntity).CurrentValues.SetValues(_mapper.Map<Director>(dto));
+                    await _dbContext.SaveChangesAsync();
+                    return new Response<DirectorDTO>(ResponseType.Success, dto);
                 }
-                return new Response<WorkUpdateDto>(ResponseType.NotFound, $"{dto.Id} ye ait data bulunamadı");
+                return new Response<DirectorDTO>(ResponseType.NotFound, $"{dto.ID} ye ait data bulunamadı");
             }
             else
             {
@@ -93,7 +95,7 @@ namespace PatikaFinalProject.Services
                     });
                 }
 
-                return new Response<WorkUpdateDto>(ResponseType.ValidationError, dto, errors);
+                return new Response<DirectorDTO>(ResponseType.ValidationError, dto, errors);
             }
         }
     }

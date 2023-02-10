@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using PatikaFinalProject.Bussiness.Services;
 using PatikaFinalProject.Common;
 using PatikaFinalProject.DataAccess;
-using PatikaFinalProject.Services;
 using System.Data;
 
 namespace PatikaFinalProject.Controllers

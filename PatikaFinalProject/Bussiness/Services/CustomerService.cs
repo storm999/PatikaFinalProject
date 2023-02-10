@@ -6,7 +6,7 @@ using PatikaFinalProject.Common;
 using PatikaFinalProject.DataAccess;
 using System.Linq;
 
-namespace PatikaFinalProject.Services
+namespace PatikaFinalProject.Bussiness.Services
 {
     public class CustomerService
     {
@@ -45,7 +45,7 @@ namespace PatikaFinalProject.Services
                 return new Response<CustomerCreateDTO>(ResponseType.ValidationError, dto, errors);
             }
         }
-  
+
 
         public async Task<IResponse> Remove(int id)
         {
@@ -58,6 +58,6 @@ namespace PatikaFinalProject.Services
             }
 
             return new Response(ResponseType.NotFound, $"{id} ye ait data bulunamadı");
-        }         
+        }
     }
 }

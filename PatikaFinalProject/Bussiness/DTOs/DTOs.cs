@@ -8,6 +8,11 @@ namespace PatikaFinalProject.DataAccess
         public string Name { get; set; }
         public string Surname { get; set; }
     }
+    public class DirectorCreateDTO
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+    }
 
     public class ActorDTO
     {
@@ -22,6 +27,15 @@ namespace PatikaFinalProject.DataAccess
     }
 
     public class MovieDTO
+    {
+        public int ID { get; set; }
+        public string MovieName { get; set; }
+        public string MovieType { get; set; }
+        public DateTime MovieYear { get; set; }
+        public int DirectorID { get; set; }
+        public int Price { get; set; }
+    }
+    public class MovieCreateDTO
     {
         public int ID { get; set; }
         public string MovieName { get; set; }

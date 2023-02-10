@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using PatikaFinalProject.Bussiness.Services;
 using PatikaFinalProject.Common;
 using PatikaFinalProject.DataAccess;
-using PatikaFinalProject.Services;
 using System.Data;
 
 namespace PatikaFinalProject.Controllers
@@ -34,7 +34,7 @@ namespace PatikaFinalProject.Controllers
         }
 
         [HttpPut(Name = "UpdateActor")]
-        public async Task<IResponse<ActorCreateDTO>> UpdateActor(ActorDTO newActor)
+        public async Task<IResponse<ActorDTO>> UpdateActor(ActorDTO newActor)
         {
             return await _actorService.Update(newActor);
         }

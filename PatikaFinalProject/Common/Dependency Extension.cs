@@ -3,9 +3,9 @@ using FluentValidation;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PatikaFinalProject.Bussiness.Services;
 using PatikaFinalProject.Controllers;
 using PatikaFinalProject.DataAccess;
-using PatikaFinalProject.Services;
 using PatikaFinalProject.Services.Mapper;
 using PatikaFinalProject.Services.Validators;
 
@@ -19,6 +19,8 @@ namespace PatikaFinalProject.Common
             MapperConfiguration configuration = new MapperConfiguration(opt =>
                                                                 {
                                                                     opt.AddProfile(new CustomerProfile());
+                                                                    opt.AddProfile(new ActorProfile());
+                                                                    opt.AddProfile(new DirectorProfile());
                                                                 });
 
             IMapper mapper = configuration.CreateMapper();
@@ -34,9 +36,13 @@ namespace PatikaFinalProject.Common
 
             //services.AddScoped<DbContext, DbContext>();
             services.AddTransient<IValidator<CustomerCreateDTO>, CustomerCreateDTOValidator>();
+            services.AddTransient<IValidator<ActorDTO>, ActorDTOValidator>();
+            services.AddTransient<IValidator<ActorCreateDTO>, ActorCreateDTOValidator>();
+
+            services.AddScoped<DirectorService, DirectorService>();
             services.AddScoped<CustomerService, CustomerService>();
             
-            services.AddScoped<MovieServices, MovieServices>();
+            services.AddScoped<MovieService, MovieService>();
             
             
 
