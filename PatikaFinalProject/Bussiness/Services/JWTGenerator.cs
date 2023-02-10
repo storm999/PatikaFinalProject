@@ -8,16 +8,22 @@ namespace PatikaFinalProject.Bussiness.Services
 {
     public class JWTGenerator
     {
+        public bool ValidateCredentials(LoginRequestModel userModel)
+        {
+            // TODO connect to DB to valite username and pass
+            // In a real project user log in mechanism would be an indivual module:
+            // Hashing and salting pass, using authorization/role pattern etc..
+            return true;
+        }
+
         public LoginResponseModel GenerateToken(LoginRequestModel userModel)
         {
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("How much is this static key secure ?"));
 
             SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Role, "Member"));
-
-
+            List<Claim> claims = new List<Claim>() { new Claim(ClaimTypes.Role, "Member") };
+    
             JwtSecurityToken token = new JwtSecurityToken(issuer: "http://localhost", claims: claims, audience: "http://localhost", notBefore: DateTime.Now, expires: DateTime.Now.AddMinutes(100), signingCredentials: credentials);
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             return new LoginResponseModel(handler.WriteToken(token), userModel);

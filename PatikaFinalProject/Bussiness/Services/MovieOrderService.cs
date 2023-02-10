@@ -45,19 +45,5 @@ namespace PatikaFinalProject.Bussiness.Services
                 return new Response<CustomerCreateDTO>(ResponseType.ValidationError, dto, errors);
             }
         }
-
-
-        public async Task<IResponse> Remove(int id)
-        {
-            var removedEntity = _dbContext.Set<Customer>().SingleOrDefault(x => x.ID == id);
-            if (removedEntity != null)
-            {
-                _dbContext.Remove(removedEntity);
-                await _dbContext.SaveChangesAsync();
-                return new Response(ResponseType.Success);
-            }
-
-            return new Response(ResponseType.NotFound, $"{id} ye ait data bulunamadı");
-        }
     }
 }

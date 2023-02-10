@@ -33,9 +33,11 @@ namespace PatikaFinalProject.Controllers
         [HttpPost("LogIn")]
         public IActionResult Login(LoginRequestModel userModel)
         {
-            if (userModel.email == "aa@aa.a" && userModel.password == "1")
+            JWTGenerator authenticator = new JWTGenerator();
+
+            if (authenticator.ValidateCredentials(userModel))
             {
-                return Created("", new JWTGenerator().GenerateToken(userModel));
+                return Created("", authenticator.GenerateToken(userModel));
             }
             else
             {
