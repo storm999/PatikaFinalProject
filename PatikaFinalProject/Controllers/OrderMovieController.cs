@@ -12,7 +12,7 @@ namespace PatikaFinalProject.Controllers
     [Route("[controller]")]
     public class OrderMovieController : ControllerBase
     {
-        /*OrderMovieService _OrderMovieService;
+        OrderMovieService _OrderMovieService;
 
         private readonly ILogger<OrderMovieService> _logger;
 
@@ -31,10 +31,17 @@ namespace PatikaFinalProject.Controllers
 
         [AllowAnonymous]
         [HttpPost("LogIn")]
-        public async Task<IResponse<OrderMovieCreateDTO>> AddOrderMovie(OrderMovieCreateDTO newOrderMovie)
+        public IActionResult Login(LoginRequestModel userModel)
         {
-            return await _OrderMovieService.Create(newOrderMovie);
-        }*/
+            if (userModel.email == "aa@aa.a" && userModel.password == "1")
+            {
+                return Created("", new JWTGenerator().GenerateToken(userModel));
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
 
 
     }

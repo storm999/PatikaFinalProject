@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PatikaFinalProject
+namespace PatikaFinalProject.Bussiness.Services
 {
     public class JWTGenerator
     {
@@ -20,8 +20,6 @@ namespace PatikaFinalProject
 
             JwtSecurityToken token = new JwtSecurityToken(issuer: "http://localhost", claims: claims, audience: "http://localhost", notBefore: DateTime.Now, expires: DateTime.Now.AddMinutes(100), signingCredentials: credentials);
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            var a = token.ValidTo.ToString();
-            var b = token.Payload.ValidTo.ToString();
             return new LoginResponseModel(handler.WriteToken(token), userModel);
         }
     }
@@ -35,7 +33,7 @@ namespace PatikaFinalProject
     {
         public LoginResponseModel(string token, LoginRequestModel userModel)
         {
-            this.Token = token;
+            Token = token;
             UserName = userModel.UserName;
         }
         public string UserName { get; set; }
