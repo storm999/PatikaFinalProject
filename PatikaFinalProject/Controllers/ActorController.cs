@@ -39,7 +39,7 @@ namespace PatikaFinalProject.Controllers
             return await _actorService.Update(newActor);
         }
 
-        [HttpGet(Name = "DeleteActor")]
+        [HttpGet("GetAllActors")]
         public async Task<IResponse> GetActors( )
         {
             return await _actorService.GetAll();

@@ -34,8 +34,6 @@ namespace PatikaFinalProject.Common
             });
             services.AddSingleton(mapper);
 
-
-            //services.AddScoped<DbContext, DbContext>();
             services.AddTransient<IValidator<CustomerCreateDTO>, CustomerCreateDTOValidator>();
             services.AddTransient<IValidator<ActorDTO>, ActorDTOValidator>();
             services.AddTransient<IValidator<ActorCreateDTO>, ActorCreateDTOValidator>();

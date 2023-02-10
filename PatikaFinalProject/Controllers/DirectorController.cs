@@ -39,7 +39,7 @@ namespace PatikaFinalProject.Controllers
             return await _DirectorService.Update(newDirector);
         }
 
-        [HttpGet(Name = "DeleteDirector")]
+        [HttpGet("GetAllDirectors")]
         public async Task<IResponse> GetDirectors( )
         {
             return await _DirectorService.GetAll();

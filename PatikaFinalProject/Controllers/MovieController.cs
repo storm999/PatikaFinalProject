@@ -39,7 +39,7 @@ namespace PatikaFinalProject.Controllers
             return await _MovieService.Update(newMovie);
         }
 
-        [HttpGet(Name = "DeleteMovie")]
+        [HttpGet("GetAllMovies")]
         public async Task<IResponse> GetMovies( )
         {
             return await _MovieService.GetAll();
