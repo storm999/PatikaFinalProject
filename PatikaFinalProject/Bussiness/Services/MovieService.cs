@@ -4,6 +4,7 @@ using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using PatikaFinalProject.Common;
 using PatikaFinalProject.DataAccess;
+using System.ComponentModel.Design;
 using System.Linq;
 
 namespace PatikaFinalProject.Bussiness.Services
@@ -43,7 +44,6 @@ namespace PatikaFinalProject.Bussiness.Services
                         PropertyName = error.PropertyName
                     });
                 }
-
                 return new Response<MovieCreateDTO>(ResponseType.ValidationError, dto, errors);
             }
         }
@@ -59,12 +59,11 @@ namespace PatikaFinalProject.Bussiness.Services
                 return new Response(ResponseType.Success);
             }
             return new Response(ResponseType.NotFound, $"{id} ye ait data bulunamadı");
-
         }
 
         public async Task<IResponse<List<MovieDTO>>> GetAll()
         {
-            List<MovieDTO> data = _mapper.Map<List<MovieDTO>>(await _dbContext.Set<Movie>().ToListAsync());
+            List<MovieDTO> data = _mapper.Map<List<MovieDTO>>(await _dbContext.Set<Movie>().Include(co => co.MovieType).ToListAsync());
             return new Response<List<MovieDTO>>(ResponseType.Success, data);
         }
 

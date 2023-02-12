@@ -21,12 +21,12 @@ namespace PatikaFinalProject.Controllers
             _OrderMovieService = service;
             _logger = logger;
         }
-        
-        [Authorize(Roles = "Member")]
+        [AllowAnonymous]
+        //[Authorize(Roles = "Member")]
         [HttpPost("OrderMovie")]
-        public async Task<IResponse<OrderCreateDTO>> OrderMovie(int movieID)
+        public async Task<IResponse<OrderCreateDTO>> OrderMovie(int movieID, int customerID)
         {
-            return await _OrderMovieService.Create(movieID);
+            return await _OrderMovieService.Create(movieID, customerID);
         }
 
         [AllowAnonymous]

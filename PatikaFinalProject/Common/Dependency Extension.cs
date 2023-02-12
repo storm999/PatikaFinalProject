@@ -21,6 +21,7 @@ namespace PatikaFinalProject.Common
                                                                                     opt.AddProfile(new ActorProfile());
                                                                                     opt.AddProfile(new DirectorProfile());
                                                                                     opt.AddProfile(new MovieProfile());
+                                                                                    opt.AddProfile(new OrderMovieProfile());
                                                                                 });
 
             IMapper mapper = configuration.CreateMapper();

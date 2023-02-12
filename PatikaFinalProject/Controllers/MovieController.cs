@@ -27,7 +27,7 @@ namespace PatikaFinalProject.Controllers
             return await _MovieService.Create(newMovie);
         }
         
-        [HttpGet(Name = "DeleteMovie")]
+        [HttpDelete(Name = "DeleteMovie")]
         public async Task<IResponse> DeleteMovie(int id)
         {
             return await _MovieService.Remove(id);

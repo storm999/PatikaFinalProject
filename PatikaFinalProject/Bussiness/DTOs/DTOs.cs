@@ -1,4 +1,5 @@
-﻿using System.Data.SqlTypes;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 
 namespace PatikaFinalProject.DataAccess
 {
@@ -30,15 +31,20 @@ namespace PatikaFinalProject.DataAccess
     {
         public int ID { get; set; }
         public string MovieName { get; set; }
-        public string MovieType { get; set; }
+        public int MovieTypeID { get; set; }
+        [ForeignKey("MovieTypeID")]
+        public MovieType? MovieType { get; set; }
         public DateTime MovieYear { get; set; }
         public int DirectorID { get; set; }
+        [ForeignKey("DirectorID")]
+        public Director? Director { get; set; }
         public int Price { get; set; }
+        public bool IsSold { get; set; } = false;
     }
     public class MovieCreateDTO
     {
         public string MovieName { get; set; }
-        public string MovieType { get; set; }
+        public int MovieTypeID { get; set; }
         public DateTime MovieYear { get; set; }
         public int DirectorID { get; set; }
         public int Price { get; set; }
@@ -62,18 +68,27 @@ namespace PatikaFinalProject.DataAccess
     {
         public DateTime OrderDate { get; set; }
         public int MovieID { get; set; }
+        public int CustomerID { get; set; }
         public int Price { get; set; }
     }
 
     public class ActorMovieDTO
     {
         public int ActorID { get; set; }
+        [ForeignKey("ActorID")]
+        public Actor? Actor { get; set; }
         public int MovieID { get; set; }
+        [ForeignKey("MovieID")]
+        public Movie? Movie { get; set; }
     }
 
     public class CustomerFavTypeDTO
     {
         public int CustomerID { get; set; }
+        [ForeignKey("CustomerID")]
+        public Customer? Customer { get; set; }
         public int FavMovieTypeID { get; set; }
+        [ForeignKey("FavMovieTypeID")]
+        public MovieType? MovieType { get; set; }
     }
 }

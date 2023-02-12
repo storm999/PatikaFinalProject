@@ -27,7 +27,7 @@ namespace PatikaFinalProject.Controllers
             return await _customerService.Create(newCus);
         }
         
-        [HttpGet(Name = "DeleteCustomer")]
+        [HttpDelete(Name = "DeleteCustomer")]
         public async Task<IResponse> DeleteCustomer(int id)
         {
             return await _customerService.Remove(id);

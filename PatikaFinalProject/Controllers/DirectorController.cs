@@ -27,7 +27,7 @@ namespace PatikaFinalProject.Controllers
             return await _DirectorService.Create(newDirector);
         }
         
-        [HttpGet(Name = "DeleteDirector")]
+        [HttpDelete(Name = "DeleteDirector")]
         public async Task<IResponse> DeleteDirector(int id)
         {
             return await _DirectorService.Remove(id);

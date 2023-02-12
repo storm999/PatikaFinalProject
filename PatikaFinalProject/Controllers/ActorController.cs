@@ -27,7 +27,7 @@ namespace PatikaFinalProject.Controllers
             return await _actorService.Create(newActor);
         }
         
-        [HttpGet(Name = "DeleteActor")]
+        [HttpDelete(Name = "DeleteActor")]
         public async Task<IResponse> DeleteActor(int id)
         {
             return await _actorService.Remove(id);

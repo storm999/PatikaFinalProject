@@ -40,4 +40,11 @@ namespace PatikaFinalProject.Services.Mapper
             CreateMap<MovieDTO, MovieCreateDTO>().ReverseMap();
         }
     }
+    public class OrderMovieProfile : Profile
+    {
+        public OrderMovieProfile()
+        {
+            CreateMap<Order, OrderCreateDTO>().ReverseMap();
+        }
+    }
 }
