@@ -48,7 +48,6 @@ namespace PatikaFinalProject.Bussiness.Services
             }
         }
 
-
         public async Task<IResponse> Remove(int id)
         {
             var removedEntity = _dbContext.Set<Movie>().SingleOrDefault(x => x.ID == id);
