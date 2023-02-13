@@ -16,14 +16,22 @@ namespace xUnitTests
             movieService = ms;
         }
 
-        [Fact]
-        public void Test1()
+        public static IEnumerable<object[]> SplitCountData =>
+                                                 new List<object[]>
+                                                 {
+                                                        new object[] { "a" , -1, new DateTime(2025,01,01) },
+                                                        new object[] { "aa" , 2, new DateTime(0025,01,01) },
+                                                        new object[] { "aaa", 3, new DateTime(9025,01,01) }
+                                                 };
+
+        [Theory, MemberData(nameof(SplitCountData))]
+        public void Test1(string name, int price, DateTime date)
         {
             MovieCreateDTO dto = new MovieCreateDTO();
 
-            dto.MovieName = "a";
-            dto.Price = -1;
-            dto.MovieYear = new DateTime(2025,01,01);
+            dto.MovieName = name;
+            dto.Price = price;
+            dto.MovieYear = date;
 
             /*Action act = async () => await movieService.Create(dto);
             act.Should().Throw<InvalidOperationException>();
