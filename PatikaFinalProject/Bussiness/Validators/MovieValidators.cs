@@ -10,6 +10,8 @@ namespace PatikaFinalProject.Services.Validators
             RuleFor(x => x.ID).NotEmpty();
             RuleFor(x => x.Price).GreaterThanOrEqualTo(0);
             RuleFor(x => x.MovieName).NotEmpty().Length(2, 50);
+            RuleFor(x => x.MovieYear).LessThanOrEqualTo(DateTime.Now);
+            RuleFor(x => x.MovieYear).GreaterThanOrEqualTo(new DateTime(1800, 01, 01));
         }
     }
 
@@ -19,6 +21,8 @@ namespace PatikaFinalProject.Services.Validators
         {
             RuleFor(x => x.Price).GreaterThanOrEqualTo(0);
             RuleFor(x => x.MovieName).NotEmpty().Length(2, 50);
+            RuleFor(x => x.MovieYear).LessThanOrEqualTo(DateTime.Now);
+            RuleFor(x => x.MovieYear).GreaterThanOrEqualTo(new DateTime(1800,01,01));
         }
     }
 }

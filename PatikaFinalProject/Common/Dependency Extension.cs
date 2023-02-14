@@ -29,7 +29,7 @@ namespace PatikaFinalProject.Common
             services.AddSingleton(mapper);
             services.AddDbContext<MyDbContext>(opt =>
             {
-                opt.UseSqlServer("Data Source=Dell; Initial Catalog=patikaFinalProject; Integrated Security=true; TrustServerCertificate=True;"); ;
+                opt.UseSqlServer("Data Source=Dell; Initial Catalog=patikaFinalProject; Integrated Security=true; TrustServerCertificate=True;"); 
                 opt.LogTo(Console.WriteLine, LogLevel.Information);
             });
             services.AddSingleton(mapper);
